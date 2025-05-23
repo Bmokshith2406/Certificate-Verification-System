@@ -1,25 +1,50 @@
-# Certificate-Verification-System
-Developed a Blockchain Certificate Verification system using Ethereum, Solidity, IPFS, and Pinata to enable tamper-proof, real-time verification of academic credentials. Eliminated reliance on centralized databases, ensuring transparency, security, and global accessibility.
+📜 Certificate Verification System
+A Blockchain-based application for tamper-proof, real-time verification of academic credentials. Built using Ethereum, Solidity, IPFS, and Pinata, this system eliminates the reliance on centralized databases and ensures transparency, security, and global accessibility.
 
+🚀 Features
+✅ Real-time academic certificate verification
 
-Project Setup Guide
-Prerequisites
-Before running the project, ensure the following applications are installed:
+🔐 Blockchain-based security using Ethereum
 
-Ganache for Windows PC
+📦 Decentralized storage using IPFS and Pinata
 
-Metamask Extension (Do NOT create an account yet)
+🔄 Smart contract-based validation and issuance
 
-Node.js (latest version recommended)
+🧾 Admin dashboard to issue certificates
 
-VSCode (or any preferred IDE)
+🌐 Public portal to verify certificates
 
+🛠️ Tech Stack
+Smart Contracts: Solidity, Truffle
+
+Blockchain Network: Ganache (local Ethereum network)
+
+Frontend: React.js
+
+Backend: Node.js, Express
+
+Storage: IPFS + Pinata
+
+Wallet Integration: MetaMask
+
+⚙️ Prerequisites
+Make sure the following are installed:
+
+Ganache
+
+MetaMask Extension
+
+Node.js (Latest)
+
+VSCode
+
+📦 Project Setup Guide
 Step 1: Download and Extract the Project
-Download the ZIP file from the provided Drive link "https://drive.google.com/file/d/1t6YohiERxSlA3E39vafL2E3wV33v5QXy/view?usp=sharing"
+Download the ZIP: Drive Link
 
-Extract the contents to a preferred location (recommended: C:/ or Home directory).
+Extract to a preferred location (e.g., C:/CertificateVerification).
 
-Open the extracted project folder in VSCode.
+Open the extracted folder in VSCode.
 
 Step 2: Start Ganache
 Open Ganache.
@@ -28,39 +53,37 @@ Click QuickStart Ethereum.
 
 Step 3: Install Dependencies
 Server Setup
-Navigate to the server directory.
-
-Run the following command:
-
+bash
+Copy
+Edit
+cd server
 npm install
 Client Setup
-Go back to the root directory, then navigate to the client directory.
-
-Run the following command:
-
+bash
+Copy
+Edit
+cd ../client
 npm install
-Step 4: Install Truffle and Ganache Globally
-Open Command Prompt (CMD) as Administrator.
-
-Run the following commands:
-
+Step 4: Install Truffle and Ganache CLI Globally
+bash
+Copy
+Edit
 npm install -g truffle
 npm install -g ganache
-Step 5: Blockchain Configuration
-Navigate to the blockchain directory (inside the root directory).
+Step 5: Configure Blockchain (Truffle)
+Navigate to blockchain/:
 
-Run the following commands:
-
+bash
+Copy
+Edit
+cd ../blockchain
 truffle unbox react
 truffle init
-Modify truffle-config.js:
+Replace contents of truffle-config.js with:
 
-Open truffle-config.js inside the blockchain folder.
-
-Delete all existing content.
-
-Paste the text from this file: 
-
+js
+Copy
+Edit
 module.exports = {
   networks: {
     development: {
@@ -71,117 +94,74 @@ module.exports = {
   },
   compilers: {
     solc: {
-      version: "0.8.0", // Ensure this matches your Certificate.sol version
+      version: "0.8.0",
     },
   },
-  // Set default mocha options here, use special reporters, etc.
-  mocha: {
-    // timeout: 100000
-  },
 };
+Create a smart contract Certificate.sol inside blockchain/contracts.
 
-Create Certificate.sol contract:
+Create a deployment script 2_deploy_your_contract.js inside blockchain/migrations.
 
-Navigate to blockchain/contracts folder.
-
-Create a new file Certificate.sol.
-
-Paste the content from this file: Certificate.sol.
-
-Create Deployment Script:
-
-Navigate to blockchain/migrations folder.
-
-Create a new file 2_deploy_your_contract.js.
-
-Paste the content from this file: Deployment Script.
-
-Compile and Deploy Smart Contract:
-
+Step 6: Compile and Deploy Smart Contract
+bash
+Copy
+Edit
 truffle develop
-compile --all
-migrate --network development --reset
-This will generate a contract address and other deployment details.
+> compile --all
+> migrate --network development --reset
+Copy the generated contract address.
 
-Step 6: Update Configuration Files
-Open CertificateVerification.json
+Step 7: Update Configuration Files
+In blockchain/build/contracts/CertificateVerification.json, find the deployed address.
 
-Navigate to blockchain/build/contracts/CertificateVerification.json.
+Update the address in:
 
-Find the networks section and copy the contract address.
+client/src/Admin.js (Line 14)
 
-Update Admin.js
+server/index.js (Line 14)
 
-Navigate to client/src/Admin.js.
+Copy the blockchain/build/contracts folder and paste it into client/src/.
 
-Replace the contract address on Line 14 with the copied address.
+Step 8: Start the Application
+In VSCode, open three terminals:
 
-Update index.js in Server
-
-Navigate to server/index.js.
-
-Replace the contract address on Line 14 with the copied address.
-
-Copy Blockchain Contracts
-
-Copy the contracts folder from blockchain/build.
-
-Paste it into client/src.
-
-Step 7: Start the Application
-Open three terminals in VSCode:
-
-Terminal 1 (Backend Server):
-
+Terminal 1 (Backend):
+bash
+Copy
+Edit
+cd server
 node index.js
-Terminal 2 (Frontend Client):
-
+Terminal 2 (Frontend):
+bash
+Copy
+Edit
+cd client
 npm start
-Step 8: Setup MetaMask
-Install MetaMask Extension on Google Chrome.
+Step 9: Setup MetaMask
+Install MetaMask in Chrome.
 
-Setup MetaMask:
+Create a password.
 
-Create a new password.
-
-Click on Ethereum Mainnet at the top left corner.
-
-Add a new custom network:
+Add a custom network:
 
 Network Name: Localhost 8545
 
-RPC URL: http://127.0.0.1:7545 (Copy from Ganache)
+RPC URL: http://127.0.0.1:7545
 
 Chain ID: 1337
 
 Symbol: ETH
 
-Click Save.
+Import account using the Private Key from the first Ganache account.
 
-Change the network to Localhost 8545.
+🧪 Test the Application
+Admin Dashboard: http://localhost:3000/admin
 
-Import an account:
+User Verification Portal: http://localhost:3000
 
-Click the account toggle in MetaMask.
+🔍 Notes
+Ensure Ganache is running before deploying or interacting with the contract.
 
-Select Import Account.
+MetaMask must be connected to the Localhost 8545 network.
 
-Copy the Private Key from the first account in Ganache and paste it into MetaMask.
-
-Step 9: Test the Application
-Open the admin dashboard:
-
-http://localhost:3000/admin
-Create a certificate and generate a hash.
-
-Verify the certificate at:
-
-http://localhost:3000
-Notes
-Ensure Ganache is running before performing blockchain operations.
-
-Use the same network settings in MetaMask as in Ganache.
-
-If facing issues, restart the application and repeat the migration step.
-
-This guide provides a clean, structured, and easy-to-follow approach for setting up and running the project.
+If you face any issues, restart the app and re-run the migration commands.
