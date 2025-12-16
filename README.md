@@ -287,4 +287,4 @@ npm start
 
 ## Conclusion
 This project demonstrates how blockchain can be effectively used for secure and transparent academic certificate verification. It combines smart contracts, decentralized storage, and modern web technologies to build a practical, real-world decentralized application.
-```
+
